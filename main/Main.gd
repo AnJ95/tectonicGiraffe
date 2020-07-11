@@ -11,10 +11,14 @@ func _ready():
 
 func _on_fruit_collected(_fruit):
     call_deferred("spawn_fruit")
-    
+
+var spawns_left = 5
 func _on_Timer_timeout():
-    for i in range(5):
-        spawn_fruit()
+    if spawns_left == 0:
+        $Timer.stop()
+        return
+    spawn_fruit()
+    spawns_left -= 1
 
 func spawn_fruit():
     var fruit = Fruit.instance()
