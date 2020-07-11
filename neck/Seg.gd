@@ -73,6 +73,8 @@ func init_key_mapping():
     key = keys[randi()%keys.size()]
     key_to_action_map[key] = Action.Extend
     key_to_action_map[antagonist_keys[key]] = Action.Contract
+    
+    print(key_to_action_map)
 ############################################
 # LIFE CYCLE
 func init(giraffe, show_start_anim=false):
@@ -152,31 +154,25 @@ func _process(delta):
 func randomize_properties():
     angle_initial = rand_range(-0.3, 0.3)
     
-    match randi() % 10:
-        # ANGLE
-        0: continue
-        1: continue
-        2: continue
-        3: continue
-        4: continue
-        5: continue
-        6:
-            angle_delta_left = rand_range(1.0, 2.2)
-            angle_delta_right = rand_range(1.0, 2.2)
-            angle_speed_left = rand_range(0.4, 0.7)
-            angle_speed_right = rand_range(0.4, 0.7)
-        # CRAZY ANGLE
-        7:
-            angle_delta_left = rand_range(PI, 2*PI)
-            angle_delta_right = rand_range(PI, 2*PI)
-            angle_speed_left = rand_range(0.8, 1.5)
-            angle_speed_right = rand_range(0.8, 1.5)
-        # EXTEND, CONTRACT
-        8: continue
-        9:
-            min_length = rand_range(length-25, length-15)
-            max_length = rand_range(length+15, length+25)
-            extend_contract_speed = rand_range(30, 60)
+    var r = randi() % 10
+    
+    # NORMAL ANGLE
+    if r >= 0 and r <= 6:
+        angle_delta_left = rand_range(1.0, 2.2)
+        angle_delta_right = rand_range(1.0, 2.2)
+        angle_speed_left = rand_range(0.4, 0.7)
+        angle_speed_right = rand_range(0.4, 0.7)
+    # CRAZY ANGLE
+    if r == 7:
+        angle_delta_left = rand_range(PI, 2*PI)
+        angle_delta_right = rand_range(PI, 2*PI)
+        angle_speed_left = rand_range(0.8, 1.5)
+        angle_speed_right = rand_range(0.8, 1.5)
+    # EXTEND, CONTRACT
+    if r >= 8 and r <= 9:
+        min_length = rand_range(length-25, length-15)
+        max_length = rand_range(length+15, length+25)
+        extend_contract_speed = rand_range(30, 60)
     
     angle_wiggle_left = rand_range(0.05, 0.1)
     angle_wiggle_right = rand_range(0.05, 0.1)
