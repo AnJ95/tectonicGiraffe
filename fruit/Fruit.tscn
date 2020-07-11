@@ -1,7 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fruit/Fruit.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/circle.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/progress.png" type="Texture" id=3]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.533333, 1 )
+colors = PoolColorArray( 0.862745, 0.254902, 0.254902, 1, 0.601562, 0.337072, 0.337072, 1, 0.164062, 0.0756147, 0.0110717, 1 )
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -9,16 +14,31 @@
 "Fruit",
 ]]
 script = ExtResource( 1 )
+rot_gradient = SubResource( 2 )
 
-[node name="circle" type="Sprite" parent="."]
+[node name="Modulator" type="Node2D" parent="."]
 modulate = Color( 0.862745, 0.254902, 0.254902, 1 )
+position = Vector2( -20, -20 )
+
+[node name="TextureProgress" type="TextureProgress" parent="Modulator"]
+margin_right = 40.0
+margin_bottom = 40.0
+value = 90.0
+texture_progress = ExtResource( 3 )
+fill_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="circle" type="Sprite" parent="Modulator"]
+position = Vector2( 20, 20 )
 texture = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = 5.03009
-margin_top = -18.1465
-margin_right = 7.03009
-margin_bottom = -4.14652
+margin_left = 3.0
+margin_top = -12.0
+margin_right = 5.0
+margin_bottom = -4.0
 rect_rotation = 19.6
 color = Color( 0.105882, 0.568627, 0.0901961, 1 )
 __meta__ = {

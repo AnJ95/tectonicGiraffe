@@ -20,7 +20,9 @@ func _process(delta):
     time += delta
     
 
-func _on_fruit_collected(_fruit):
+func _on_fruit_collected(fruit):
+    if fruit == null:
+        return
     call_deferred("add_segment")
     
 func add_segment():
