@@ -15,7 +15,9 @@ export(float) var angle_wiggle_right = 0.0
 export(float) var wiggle_period = 1.0
 
 export(float) var width = 10
-export(float) var length = 40
+export(float) var length = 80
+
+
 
 ############################################
 # NODES
@@ -29,7 +31,29 @@ onready var circle = $Visual/Circle
 var time = 0.0
 var angle = 0
 
+############################################
+# RANDOM KEY MAPPING
+enum Action {
+    Left, Right
+}
+var keys = ["key_0", "key_1", "key_2", "key_3"]
+var actions = [Action.Left, Action.Right]
+
+var key_to_action_map = {}
+
+func init_key_mapping():
+    while actions.size() > 0 and keys.size() > 0:
+        var key = keys[randi()%keys.size()]
+        var action = actions[randi()%actions.size()]
+        key_to_action_map[key] = action
+        print(str(key) + " => " + str(action))
+        keys.erase(key)
+        actions.erase(action)
+############################################
+# LIFE CYCLE
 func _ready():
+    init_key_mapping()
+    
     randomize_properties()
     
     var par = get_parent()
@@ -46,10 +70,16 @@ func _ready():
     circle.scale = Vector2(s, s)
     circle.position = Vector2(0, -length)
 
+
 func _process(delta):
-    if Input.is_action_pressed("rotate_left"):
+    var actions = []
+    for key in key_to_action_map.keys():
+        if Input.is_action_pressed(key):
+            actions.append(key_to_action_map[key])
+    
+    if actions.has(Action.Left):
         angle -= angle_speed_left * delta
-    if Input.is_action_pressed("rotate_right"):
+    if actions.has(Action.Right):
         angle += angle_speed_right * delta
 
     angle = clamp(angle, angle_initial - angle_delta_left, angle_initial + angle_delta_right)
@@ -65,10 +95,10 @@ func _process(delta):
 func randomize_properties():
     angle_initial = rand_range(-0.3, 0.3)
     
-    angle_delta_left = rand_range(0, 1.2)
+    angle_delta_left = rand_range(1.0, 2.2)
     if randi()%100 < 30: angle_delta_left = 0
     
-    angle_delta_right = rand_range(0, 1.2)
+    angle_delta_right = rand_range(1.0, 2.2)
     if randi()%100 < 30: angle_delta_right = 0
     
     angle_speed_left = rand_range(0.1, 0.5)
