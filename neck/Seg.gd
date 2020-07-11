@@ -28,7 +28,7 @@ onready var circle = $Visual/Circle
 ############################################
 # STATE
 
-var time = 0.0
+var giraffe
 var angle = 0
 
 ############################################
@@ -51,6 +51,10 @@ func init_key_mapping():
         actions.erase(action)
 ############################################
 # LIFE CYCLE
+func init(giraffe):
+    self.giraffe = giraffe
+    return self
+    
 func _ready():
     init_key_mapping()
     
@@ -84,8 +88,7 @@ func _process(delta):
 
     angle = clamp(angle, angle_initial - angle_delta_left, angle_initial + angle_delta_right)
     
-    time += delta
-    var wiggle = sin((2*PI) * time / wiggle_period)
+    var wiggle = sin((2*PI) * giraffe.time / wiggle_period)
     wiggle = (wiggle + 1) * 0.5 # [0,1]
     wiggle *= (angle_wiggle_left + angle_wiggle_right) # [0,l+r]
     wiggle -= angle_wiggle_left # [-l, r]

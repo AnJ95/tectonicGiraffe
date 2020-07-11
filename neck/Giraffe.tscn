@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://neck/Giraffe.gd" type="Script" id=1]
+[ext_resource path="res://neck/Head.tscn" type="PackedScene" id=2]
+
+[node name="Giraffe" type="Node2D"]
+position = Vector2( 510, 500 )
+script = ExtResource( 1 )
+
+[node name="Neck" type="Node2D" parent="."]
+
+[node name="Head" parent="Neck" instance=ExtResource( 2 )]
