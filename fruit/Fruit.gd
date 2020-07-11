@@ -24,7 +24,7 @@ func _ready():
     animationPlayer.play("grow")
     progress.hide()
 
-func done_growing():
+func done_growing(_d):
     progress.show()
     is_grown = true
     

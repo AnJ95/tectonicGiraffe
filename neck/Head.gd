@@ -7,6 +7,9 @@ func _on_Area2D_area_entered(area):
     if !area.get_parent().is_in_group("Fruit"):
         return
     
+    if !area.get_parent().is_grown:
+        return
+        
     if area.get_parent().is_collected:
         return
     

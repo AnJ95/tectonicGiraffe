@@ -28,6 +28,7 @@ onready var circle = $Visual/Circle
 ############################################
 # STATE
 
+var show_start_anim = false
 var giraffe
 var angle = 0
 
@@ -62,8 +63,9 @@ func init_key_mapping():
     key_to_action_map[antagonist_keys[key]] = Action.Right
 ############################################
 # LIFE CYCLE
-func init(giraffe):
+func init(giraffe, show_start_anim=false):
     self.giraffe = giraffe
+    self.show_start_anim = show_start_anim
     return self
     
 func _ready():
@@ -78,13 +80,30 @@ func _ready():
     angle = angle_initial
     rotation = angle
     
-    line.rect_size = Vector2(width, length)
-    line.rect_position = Vector2(-width/2, -length)
+    line.rect_size.x = width
+    line.rect_position.x = -width/2
     
     var s = width / float(circle.texture.get_width())
     circle.scale = Vector2(s, s)
-    circle.position = Vector2(0, -length)
+    circle.position.x = 0
+    
+    if show_start_anim:
+        print("1")
+        $Tween.interpolate_method(self, "set_length", 0, length, 1.0, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+        $Tween.start()
+    else:
+        print("2")
+        set_length(length)
 
+func set_length(new_length):
+    length = new_length
+    line.rect_size.y = length
+    line.rect_position.y = -length
+    circle.position.y = -length
+    for child in get_children():
+        if child.is_in_group("Head") or child.is_in_group("Seg"):
+            child.position = get_next_seg_local_pos()
+    
 
 func _process(delta):    
     var actions = []

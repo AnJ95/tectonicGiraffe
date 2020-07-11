@@ -23,11 +23,11 @@ func _process(delta):
 func _on_fruit_collected(fruit):
     if fruit == null:
         return
-    call_deferred("add_segment")
+    call_deferred("add_segment", true)
     
-func add_segment():
+func add_segment(show_start_anim=false):
     # add new segment to heads parent
-    var seg = Seg.instance().init(self)
+    var seg = Seg.instance().init(self, show_start_anim)
     head.get_parent().add_child(seg)
     
     # reparent head to new segment
