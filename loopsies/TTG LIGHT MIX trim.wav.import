@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/TTG LIGHT MIX trim.wav-95c3d8da0d0c64baacc8415492eedb69.sample"
+
+[deps]
+
+source_file="res://loopsies/TTG LIGHT MIX trim.wav"
+dest_files=[ "res://.import/TTG LIGHT MIX trim.wav-95c3d8da0d0c64baacc8415492eedb69.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
