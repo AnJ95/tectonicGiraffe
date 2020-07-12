@@ -19,6 +19,11 @@ config/name="TectonicGiraffe"
 run/main_scene="res://main/Main.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
 [input]
 
 rotate_left={
