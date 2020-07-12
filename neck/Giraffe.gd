@@ -40,7 +40,8 @@ func _ready():
 func _process(delta):
     time += delta
     
-    set_health(health + delta * HEALTH_PER_SECOND)
+    if tutorial_done:
+        set_health(health + delta * HEALTH_PER_SECOND)
     
 
     var db = (health / cur_max_health)
@@ -82,6 +83,10 @@ func add_segment(show_start_anim=false):
         tweenHealth.start()
     else:
         set_health(health + HEALTH_PER_FRUIT)
+
+var tutorial_done = false
+func _on_tutorial_done():
+    tutorial_done = true
     
 func died():
     if !dead:
