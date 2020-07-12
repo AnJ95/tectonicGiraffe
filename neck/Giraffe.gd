@@ -6,6 +6,8 @@ onready var Seg = preload("res://neck/Seg.tscn")
 onready var SegClass = preload("res://neck/Seg.gd")
 
 onready var tweenHealth = $TweenHealth
+onready var tweenMovement = $TweenMovement
+
 onready var head = $Neck/Head
 onready var criticalHealth = $CriticalHealth
 
@@ -86,6 +88,9 @@ func died():
         emit_signal("dead")
         $DeathPlayer.play()
         criticalHealth.stop()
+        
+        tweenMovement.interpolate_property(self, "rotation", 0, PI/2, 0.3, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+        tweenMovement.start()
         
     dead = true
 

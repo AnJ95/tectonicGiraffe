@@ -41,7 +41,7 @@ scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 6 )
 
 [node name="Giraffe" parent="." instance=ExtResource( 2 )]
-position = Vector2( 510, 363.734 )
+position = Vector2( 510, 423.281 )
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

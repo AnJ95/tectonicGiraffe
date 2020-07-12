@@ -10,11 +10,12 @@
 script = ExtResource( 1 )
 
 [node name="Neck" type="Node2D" parent="."]
+position = Vector2( 0, -61.826 )
 
 [node name="Head" parent="Neck" instance=ExtResource( 2 )]
 
 [node name="giraffe" type="Sprite" parent="."]
-position = Vector2( -2.59024, 15.1436 )
+position = Vector2( -2.59024, -45.507 )
 scale = Vector2( 0.052, 0.052 )
 texture = ExtResource( 3 )
 
@@ -28,3 +29,5 @@ volume_db = -23.451
 stream = ExtResource( 5 )
 volume_db = -80.0
 autoplay = true
+
+[node name="TweenMovement" type="Tween" parent="."]

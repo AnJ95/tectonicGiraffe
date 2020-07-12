@@ -14,8 +14,8 @@ export(float) var angle_speed_right = 0.7
 export(float) var angle_delta_left = 0.0
 export(float) var angle_delta_right = 0.0
 
-export(float) var min_length = 50
-export(float) var max_length = 50
+export(float) var min_length = 42
+export(float) var max_length = 42
 export(float) var extend_contract_speed = 20
 
 export(float) var angle_wiggle_left = 0.0
@@ -23,7 +23,7 @@ export(float) var angle_wiggle_right = 0.0
 export(float) var wiggle_period = 1.0
 
 export(float) var width = 10
-export(float) var length_initial = 50
+export(float) var length_initial = 42
 
 
 
