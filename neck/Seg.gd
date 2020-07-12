@@ -153,9 +153,19 @@ func set_length(new_length):
     for child in get_children():
         if child.is_in_group("Head") or child.is_in_group("Seg"):
             child.position = get_next_seg_local_pos()
-    
+
+
+var is_dead = false
+var death_angle_speed
+func dead():
+    is_dead = true
+    death_angle_speed = rand_range(-0.8, 0.8)
 
 func _process(delta):    
+    if is_dead:
+        rotation += delta * death_angle_speed
+        return
+        
     var actions = []
     for key in key_to_action_map.keys():
         if Input.is_action_pressed(key):
