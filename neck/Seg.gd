@@ -123,7 +123,6 @@ func _ready():
     sprite.region_enabled = true
         
 func set_health(health):
-    print("dsa")
     var my_health = min(HEALTH_PER_SEG, health)
     
     var rel_health = (my_health / HEALTH_PER_SEG)

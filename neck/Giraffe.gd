@@ -3,8 +3,10 @@ extends Node2D
 onready var Seg = preload("res://neck/Seg.tscn")
 onready var SegClass = preload("res://neck/Seg.gd")
 
-const HEALTH_PER_FRUIT = 3.0
-const HEALTH_PER_SECOND = -0.34
+onready var tweenHealth = $TweenHealth
+
+const HEALTH_PER_FRUIT = 2.0
+const HEALTH_PER_SECOND = -0.32
 
 onready var head = $Neck/Head
 
@@ -48,7 +50,13 @@ func add_segment(show_start_anim=false):
     # health
     num_segs += 1
     cur_max_health = SegClass.HEALTH_PER_SEG * num_segs
-    set_health(health + HEALTH_PER_FRUIT)
+    if show_start_anim:
+        if tweenHealth.is_active():
+            tweenHealth.stop_all()
+        tweenHealth.interpolate_method(self, "set_health", health, health + HEALTH_PER_FRUIT, 0.6)
+        tweenHealth.start()
+    else:
+        set_health(health + HEALTH_PER_FRUIT)
     
 func died():
     print("DEAD")

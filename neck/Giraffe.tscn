@@ -15,3 +15,5 @@ script = ExtResource( 1 )
 position = Vector2( -2.59024, 15.1436 )
 scale = Vector2( 0.052, 0.052 )
 texture = ExtResource( 3 )
+
+[node name="TweenHealth" type="Tween" parent="."]
