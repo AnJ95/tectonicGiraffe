@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://main/Main.gd" type="Script" id=1]
 [ext_resource path="res://neck/Giraffe.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/sprites/baum.png" type="Texture" id=6]
 [ext_resource path="res://main/TreePolygon.gd" type="Script" id=7]
 [ext_resource path="res://assets/fonts/deftone stylus.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://assets/sprites/land.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
@@ -24,10 +25,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 40.0
 margin_bottom = 40.0
-color = Color( 0.65098, 0.678431, 0.439216, 1 )
+color = Color( 0.564706, 0.862745, 0.835294, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="land" type="Sprite" parent="."]
+position = Vector2( 516.267, -163.923 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 9 )
 
 [node name="baum" type="Sprite" parent="."]
 position = Vector2( 512.693, -194.814 )
