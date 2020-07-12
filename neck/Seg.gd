@@ -159,7 +159,7 @@ var is_dead = false
 var death_angle_speed
 func dead():
     is_dead = true
-    death_angle_speed = rand_range(-0.8, 0.8)
+    death_angle_speed = rand_range(-0.9, 0.9)
 
 func _process(delta):    
     if is_dead:

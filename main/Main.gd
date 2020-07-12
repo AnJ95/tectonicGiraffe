@@ -7,6 +7,7 @@ signal fruit_collected(fruit)
 onready var giraffe = $Giraffe
 onready var camera = $Camera2D
 onready var tweenZoom = $TweenZoom
+onready var jingle = $Jingle
 onready var Fruit = preload("res://fruit/Fruit.tscn")
 
 func _ready():
@@ -18,6 +19,8 @@ func _on_fruit_collected(fruit):
         tweenZoom.interpolate_property(camera, "offset:y", camera.offset.y, camera.offset.y + CAM_OFFSET_PER_FRUIT, 0.6)
         tweenZoom.interpolate_property(camera, "zoom", camera.zoom, camera.zoom * ZOOM_PER_FRUIT, 0.6)
         tweenZoom.start()
+        jingle.play(0)
+        
         
 var spawns_left = 5
 func _on_Timer_timeout():

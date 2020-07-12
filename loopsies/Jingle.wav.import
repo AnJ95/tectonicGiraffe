@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Jingle.wav-d352bd8a221a69b86562db4b78c79dcc.sample"
+
+[deps]
+
+source_file="res://loopsies/Jingle.wav"
+dest_files=[ "res://.import/Jingle.wav-d352bd8a221a69b86562db4b78c79dcc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0

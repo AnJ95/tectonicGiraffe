@@ -6,11 +6,15 @@ onready var Seg = preload("res://neck/Seg.tscn")
 onready var SegClass = preload("res://neck/Seg.gd")
 
 onready var tweenHealth = $TweenHealth
+onready var head = $Neck/Head
+onready var criticalHealth = $CriticalHealth
 
 const HEALTH_PER_FRUIT = 2.0
 const HEALTH_PER_SECOND = -0.32
 
-onready var head = $Neck/Head
+const CRITICAL_START = 0.4
+const CRITICAL_MIN = -80
+const CRITICAL_MAX = -10
 
 var dead = false
 
@@ -35,6 +39,19 @@ func _process(delta):
     time += delta
     
     set_health(health + delta * HEALTH_PER_SECOND)
+    
+
+    var db = (health / cur_max_health)
+    if db > CRITICAL_START:
+        db = CRITICAL_MIN
+    else: #[0, 0.2]
+        db = lerp(CRITICAL_MIN, CRITICAL_MAX, 1 - db / CRITICAL_START)
+    db = clamp(db, CRITICAL_MIN, CRITICAL_MAX)
+    
+    criticalHealth.volume_db = db
+        
+    
+    
 
 func _on_fruit_collected(fruit):
     if fruit == null:
@@ -68,6 +85,8 @@ func died():
     if !dead:
         emit_signal("dead")
         $DeathPlayer.play()
+        criticalHealth.stop()
+        
     dead = true
 
 func set_health(new_health):
