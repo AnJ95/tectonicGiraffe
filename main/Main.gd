@@ -24,4 +24,12 @@ func spawn_fruit():
     var fruit = Fruit.instance()
     connect("fruit_collected", fruit, "_on_fruit_collected")
     add_child(fruit)
-    fruit.global_position = giraffe.calc_random_reachable_pos()
+    
+    var pos = Vector2(-100, 0)
+    var allowedRect:Rect2 = get_viewport().get_visible_rect()
+    allowedRect = allowedRect.grow(-50)
+    
+    while (!allowedRect.has_point(pos)):
+        pos = giraffe.calc_random_reachable_pos()
+    
+    fruit.global_position = pos
