@@ -159,11 +159,12 @@ var is_dead = false
 var death_angle_speed
 func dead():
     is_dead = true
-    death_angle_speed = rand_range(-0.9, 0.9)
+    death_angle_speed = rand_range(-1.8, 1.8)
 
 func _process(delta):    
     if is_dead:
         rotation += delta * death_angle_speed
+        set_length(length *0.98)
         return
         
     var actions = []

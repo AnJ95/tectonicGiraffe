@@ -14,7 +14,7 @@ onready var criticalHealth = $CriticalHealth
 const HEALTH_PER_FRUIT = 2.0
 const HEALTH_PER_SECOND = -0.32
 
-const CRITICAL_START = 0.4
+const CRITICAL_START = 0.5
 const CRITICAL_MIN = -80
 const CRITICAL_MAX = -10
 

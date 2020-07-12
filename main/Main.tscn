@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://main/Main.gd" type="Script" id=1]
 [ext_resource path="res://neck/Giraffe.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/sprites/bubble.png" type="Texture" id=11]
 [ext_resource path="res://main/Tutorial.gd" type="Script" id=12]
 [ext_resource path="res://main/RetryGame.gd" type="Script" id=13]
+[ext_resource path="res://assets/sprites/ retry.button.exe.png" type="Texture" id=14]
 
 [sub_resource type="DynamicFont" id=2]
 size = 30
@@ -121,14 +122,17 @@ __meta__ = {
 }
 
 [node name="RetryGame" type="TextureButton" parent="UI"]
-margin_left = 97.8912
-margin_top = 446.997
-margin_right = 241.891
-margin_bottom = 527.997
+margin_left = 42.4897
+margin_top = 431.742
+margin_right = 298.49
+margin_bottom = 559.742
+texture_normal = ExtResource( 14 )
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tween" type="Tween" parent="UI/RetryGame"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="UI/Tutorial/TimerTutorial" to="UI/Tutorial" method="_on_TimerTutorial_timeout"]
 [connection signal="pressed" from="UI/RetryGame" to="UI/RetryGame" method="_on_RetryGame_pressed"]
