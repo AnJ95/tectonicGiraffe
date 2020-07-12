@@ -1,6 +1,10 @@
 extends Node2D
 
 ############################################
+# CONSTS
+const HEALTH_PER_SEG = 1.0
+
+############################################
 # CUSTOMIZATION
 
 export(float) var angle_initial = 0.0
@@ -29,6 +33,7 @@ export(float) var length_initial = 50
 onready var line = $Visual/Line
 onready var circle = $Visual/Circle
 onready var sprite = $Visual/Sprite
+onready var spriteEmpty = $Visual/SpriteEmpty
 
 ############################################
 # STATE
@@ -95,6 +100,7 @@ func _ready():
     rotation = angle
     
     sprite.scale.x = width / float(sprite.texture.get_width())
+    spriteEmpty.scale.x = sprite.scale.x
     
     line.rect_size.x = width
     line.rect_position.x = -width/2
@@ -109,6 +115,26 @@ func _ready():
         $Tween.start()
     else:
         set_length(length_initial)
+        
+    
+    var h = sprite.texture.get_height()
+    sprite.region_rect = Rect2(0, 0, sprite.texture.get_width(), h)
+    sprite.position.y = spriteEmpty.position.y
+    sprite.region_enabled = true
+        
+func set_health(health):
+    print("dsa")
+    var my_health = min(HEALTH_PER_SEG, health)
+    
+    var rel_health = (my_health / HEALTH_PER_SEG)
+    var h = sprite.texture.get_height() * rel_health
+    sprite.region_rect = Rect2(0, 0, sprite.texture.get_width(), h)
+    
+    sprite.position.y = spriteEmpty.position.y + (1 - my_health / HEALTH_PER_SEG) * sprite.texture.get_height() * sprite.scale.y * 0.5
+    
+    for child in get_children():
+        if child.is_in_group("Seg"):
+            child.set_health(health - my_health)
 
 func _on_start_anim_done():
     start_anim_done = true
@@ -121,6 +147,10 @@ func set_length(new_length):
     
     sprite.scale.y = length / float(sprite.texture.get_height())
     sprite.position.y = -length * 0.5
+    
+    spriteEmpty.scale.y = sprite.scale.y
+    spriteEmpty.position.y = sprite.position.y
+    
     for child in get_children():
         if child.is_in_group("Head") or child.is_in_group("Seg"):
             child.position = get_next_seg_local_pos()

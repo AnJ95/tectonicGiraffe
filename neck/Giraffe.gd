@@ -1,10 +1,19 @@
 extends Node2D
 
 onready var Seg = preload("res://neck/Seg.tscn")
+onready var SegClass = preload("res://neck/Seg.gd")
+
+const HEALTH_PER_FRUIT = 3.0
+const HEALTH_PER_SECOND = -0.34
+
 onready var head = $Neck/Head
 
 var time = 0
 var is_clone = false
+
+var num_segs = 0
+var health = 1
+var cur_max_health = 1
 
 func _ready():
     
@@ -19,6 +28,7 @@ func _ready():
 func _process(delta):
     time += delta
     
+    set_health(health + delta * HEALTH_PER_SECOND)
 
 func _on_fruit_collected(fruit):
     if fruit == null:
@@ -34,6 +44,23 @@ func add_segment(show_start_anim=false):
     head.get_parent().remove_child(head)
     seg.add_child(head)
     head.position = seg.get_next_seg_local_pos()
+    
+    # health
+    num_segs += 1
+    cur_max_health = SegClass.HEALTH_PER_SEG * num_segs
+    set_health(health + HEALTH_PER_FRUIT)
+    
+func died():
+    print("DEAD")
+
+func set_health(new_health):
+    if new_health < 0:
+        died()
+    
+    health = clamp(new_health, 0, cur_max_health)
+    for child in $Neck.get_children():
+        if child.is_in_group("Seg"):
+            child.set_health(health)
     
 func calc_random_reachable_pos():
     set_all_angles_random()
