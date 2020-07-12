@@ -4,7 +4,6 @@ func _ready():
     $AnimationPlayer.play("wiggle")
 
 func _on_TextureButton_pressed():
-    print(1)
     $Particles2D.emitting = true
     $Timer.start()
 
