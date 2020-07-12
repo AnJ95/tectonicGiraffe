@@ -6,12 +6,21 @@ signal fruit_collected(fruit)
 
 onready var giraffe = $Giraffe
 onready var camera = $Camera2D
-onready var tweenZoom = $TweenZoom
 onready var jingle = $Jingle
+onready var tequeMix = $TequeMix
+
+onready var tweenZoom = $TweenZoom
+onready var tweenSound = $TweenSound
+
 onready var Fruit = preload("res://fruit/Fruit.tscn")
 
 func _ready():
     connect("fruit_collected", self, "_on_fruit_collected")
+    giraffe.connect("dead", self, "_on_dead")
+
+func _on_dead():
+    tweenSound.interpolate_property(tequeMix, "volume_db", tequeMix.volume_db, -80, 3)
+    tweenSound.start()
     
 func _on_fruit_collected(fruit):
     call_deferred("spawn_fruit")

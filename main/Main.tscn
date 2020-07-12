@@ -30,7 +30,7 @@ autostart = true
 
 [node name="Jingle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-volume_db = -21.922
+volume_db = -24.981
 
 [node name="TequeMix" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 509.29, 332.997 )
@@ -45,4 +45,6 @@ current = true
 zoom = Vector2( 0.5, 0.5 )
 
 [node name="TweenZoom" type="Tween" parent="."]
+
+[node name="TweenSound" type="Tween" parent="."]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
