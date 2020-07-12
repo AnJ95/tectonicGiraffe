@@ -8,6 +8,7 @@ onready var giraffe = $Giraffe
 onready var camera = $Camera2D
 onready var jingle = $Jingle
 onready var tequeMix = $TequeMix
+onready var treePolygon:Polygon2D = $TreePolygon
 
 onready var tweenZoom = $TweenZoom
 onready var tweenSound = $TweenSound
@@ -45,11 +46,26 @@ func spawn_fruit():
     add_child(fruit)
     
     var pos = Vector2(-100, 0)
-    var allowedRect:Rect2 = camera.get_viewport().get_visible_rect()
+    
+    var allowedRect:Rect2 = get_camera_rect()
+    #var allowedRect:Rect2 = camera.get_viewport().get_visible_rect()
     #var allowedRect:Rect2 = get_viewport().get_visible_rect()
     allowedRect = allowedRect.grow(-50)
     
-    while (!allowedRect.has_point(pos)):
+    while (!allowedRect.has_point(pos) or !treePolygon.has_point(pos)):
         pos = giraffe.calc_random_reachable_pos()
     
     fruit.global_position = pos
+
+func get_camera_rect():
+    # Get the canvas transform
+    var ctrans = get_canvas_transform()
+    
+    var min_pos = -ctrans.get_origin() / ctrans.get_scale()
+    
+    # The maximum edge is obtained by adding the rectangle size.
+    # Because it's a size it's only affected by zoom, so divide by scale too.
+    var view_size = get_viewport_rect().size / ctrans.get_scale()
+    var max_pos = min_pos + view_size
+    
+    return Rect2(min_pos, max_pos - min_pos)

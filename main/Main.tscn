@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://main/Main.gd" type="Script" id=1]
 [ext_resource path="res://neck/Giraffe.tscn" type="PackedScene" id=2]
 [ext_resource path="res://loopsies/TTG LIGHT MIX trim.wav" type="AudioStream" id=3]
 [ext_resource path="res://main/TequeMix.gd" type="Script" id=4]
 [ext_resource path="res://loopsies/Jingle.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sprites/baum.png" type="Texture" id=6]
+[ext_resource path="res://main/TreePolygon.gd" type="Script" id=7]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -17,10 +19,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 40.0
 margin_bottom = 40.0
-color = Color( 0.505882, 0.682353, 0.501961, 1 )
+color = Color( 0.65098, 0.678431, 0.439216, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="baum" type="Sprite" parent="."]
+position = Vector2( 520.066, -194.814 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 6 )
 
 [node name="Giraffe" parent="." instance=ExtResource( 2 )]
 position = Vector2( 510, 363.734 )
@@ -47,4 +54,9 @@ zoom = Vector2( 0.5, 0.5 )
 [node name="TweenZoom" type="Tween" parent="."]
 
 [node name="TweenSound" type="Tween" parent="."]
+
+[node name="TreePolygon" type="Polygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( 163.432, 294.839, 218.981, 313.573, 493.46, 271.094, 633.967, 301.592, 729.817, 290.7, 760.315, 328.822, 855.076, 314.662, 870.324, 236.24, 926.963, 202.474, 969.442, 225.348, 1001.03, 173.066, 1032.62, 178.512, 1008.65, 132.765, 1041.33, 87.0189, 1094.7, 82.6621, 1124.11, 54.3428, 1100.15, -1.20648, 1141.54, -33.8826, 1127.16, -483.941, -88.3916, -457.8, -86.2132, 55.2142, -31.7531, 79.1766, -4.52304, 133.637, 30.3314, 109.674, 46.6695, 182.651, 107.665, 176.116, 115.507, 238.2 )
+script = ExtResource( 7 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

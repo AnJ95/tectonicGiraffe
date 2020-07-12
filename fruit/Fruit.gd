@@ -26,6 +26,7 @@ func _ready():
 
 func done_growing(_d):
     progress.show()
+    $Area2D.monitorable = true
     is_grown = true
     
 func _process(delta):
