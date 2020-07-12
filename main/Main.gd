@@ -20,6 +20,7 @@ var score = 0
 func _ready():
     connect("fruit_collected", self, "_on_fruit_collected")
     giraffe.connect("dead", self, "_on_dead")
+    giraffe.connect("dead", $UI/RetryGame, "_on_dead")
     
     $UI/Tutorial.connect("tutorial_done", giraffe, "_on_tutorial_done")
 
