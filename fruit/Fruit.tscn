@@ -1,12 +1,12 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://fruit/Fruit.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/circle.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/progress.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/epfle.png" type="Texture" id=4]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.533333, 1 )
-colors = PoolColorArray( 0.862745, 0.254902, 0.254902, 1, 0.601562, 0.337072, 0.337072, 1, 0.164062, 0.0756147, 0.0110717, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.621094, 0.502138, 0.415333, 1, 0.164062, 0.0756147, 0.0110717, 1 )
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -14,43 +14,23 @@ colors = PoolColorArray( 0.862745, 0.254902, 0.254902, 1, 0.601562, 0.337072, 0.
 resource_name = "grow"
 length = 2.0
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Modulator/circle:scale:x")
+tracks/0/path = NodePath("Sprite:scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0.19, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 2 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Modulator/circle:scale:y")
+tracks/1/path = NodePath("Sprite:scale:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 2 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("ColorRect:rect_scale:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 2 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("ColorRect:rect_scale:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0.19, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 2 )
 }
 
@@ -60,14 +40,12 @@ tracks/3/keys = {
 script = ExtResource( 1 )
 rot_gradient = SubResource( 2 )
 
-[node name="Modulator" type="Node2D" parent="."]
-modulate = Color( 0.862745, 0.254902, 0.254902, 1 )
-position = Vector2( -20, -20 )
-
-[node name="TextureProgress" type="TextureProgress" parent="Modulator"]
-modulate = Color( 1, 1, 1, 0.541176 )
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="TextureProgress" type="TextureProgress" parent="."]
+modulate = Color( 0.823529, 0.129412, 0.0862745, 0.329412 )
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
 value = 90.0
 texture_progress = ExtResource( 3 )
 fill_mode = 5
@@ -75,21 +53,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="circle" type="Sprite" parent="Modulator"]
-position = Vector2( 20, 20 )
-texture = ExtResource( 2 )
-
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -1.5
-margin_top = -14.0
-margin_right = 0.5
-margin_bottom = -6.0
-rect_rotation = 19.6
-rect_pivot_offset = Vector2( 1.5, 14 )
-color = Color( 0.105882, 0.568627, 0.0901961, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.013, -6.72192 )
+scale = Vector2( 0.19, 0.19 )
+texture = ExtResource( 4 )
+offset = Vector2( 0, 30 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

@@ -2,8 +2,8 @@ extends Node2D
 
 export(Gradient) var rot_gradient:Gradient
 
-onready var modulator = $Modulator
-onready var progress = $Modulator/TextureProgress
+onready var sprite = $Sprite
+onready var progress = $TextureProgress
 onready var animationPlayer = $AnimationPlayer
 
 var is_grown = false
@@ -17,8 +17,7 @@ func _ready():
     progress.max_value = lifetime_max
     progress.step = lifetime_max / 100.0
     
-    $Modulator/circle.scale = Vector2(0,0)
-    $ColorRect.rect_scale = Vector2(0,0)
+    sprite.scale = Vector2(0,0)
     
     animationPlayer.connect("animation_finished", self, "done_growing")
     animationPlayer.play("grow")
@@ -36,7 +35,7 @@ func _process(delta):
     lifetime += delta
     
     progress.value = lifetime_max - lifetime
-    modulator.modulate = rot_gradient.interpolate(lifetime / lifetime_max)
+    sprite.modulate = rot_gradient.interpolate(lifetime / lifetime_max)
     
     if lifetime >= lifetime_max:
         get_tree().root.get_node("Main").emit_signal("fruit_collected", null)
