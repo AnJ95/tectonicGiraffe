@@ -28,6 +28,7 @@ export(float) var length_initial = 50
 
 onready var line = $Visual/Line
 onready var circle = $Visual/Circle
+onready var sprite = $Visual/Sprite
 
 ############################################
 # STATE
@@ -74,7 +75,6 @@ func init_key_mapping():
     key_to_action_map[key] = Action.Extend
     key_to_action_map[antagonist_keys[key]] = Action.Contract
     
-    print(key_to_action_map)
 ############################################
 # LIFE CYCLE
 func init(giraffe, show_start_anim=false):
@@ -93,6 +93,8 @@ func _ready():
     
     angle = angle_initial
     rotation = angle
+    
+    sprite.scale.x = width / float(sprite.texture.get_width())
     
     line.rect_size.x = width
     line.rect_position.x = -width/2
@@ -116,6 +118,9 @@ func set_length(new_length):
     line.rect_size.y = length
     line.rect_position.y = -length
     circle.position.y = -length
+    
+    sprite.scale.y = length / float(sprite.texture.get_height())
+    sprite.position.y = -length * 0.5
     for child in get_children():
         if child.is_in_group("Head") or child.is_in_group("Seg"):
             child.position = get_next_seg_local_pos()
