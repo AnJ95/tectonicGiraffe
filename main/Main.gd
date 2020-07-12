@@ -9,11 +9,13 @@ onready var camera = $Camera2D
 onready var jingle = $Jingle
 onready var tequeMix = $TequeMix
 onready var treePolygon:Polygon2D = $TreePolygon
-
+onready var labelScore = $UI/Score
 onready var tweenZoom = $TweenZoom
 onready var tweenSound = $TweenSound
 
 onready var Fruit = preload("res://fruit/Fruit.tscn")
+
+var score = 0
 
 func _ready():
     connect("fruit_collected", self, "_on_fruit_collected")
@@ -26,6 +28,8 @@ func _on_dead():
 func _on_fruit_collected(fruit):
     call_deferred("spawn_fruit")
     if fruit != null:
+        score += 1
+        labelScore.text = str(score) if score >= 10 else "0" + str(score)
         tweenZoom.interpolate_property(camera, "offset:y", camera.offset.y, camera.offset.y + CAM_OFFSET_PER_FRUIT, 0.6)
         tweenZoom.interpolate_property(camera, "zoom", camera.zoom, camera.zoom * ZOOM_PER_FRUIT, 0.6)
         tweenZoom.start()
