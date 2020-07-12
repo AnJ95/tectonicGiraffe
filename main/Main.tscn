@@ -30,7 +30,7 @@ __meta__ = {
 }
 
 [node name="baum" type="Sprite" parent="."]
-position = Vector2( 520.066, -194.814 )
+position = Vector2( 512.693, -194.814 )
 scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 6 )
 

@@ -30,8 +30,14 @@ func _on_fruit_collected(fruit):
     if fruit != null:
         score += 1
         labelScore.text = str(score) if score >= 10 else "0" + str(score)
-        tweenZoom.interpolate_property(camera, "offset:y", camera.offset.y, camera.offset.y + CAM_OFFSET_PER_FRUIT, 0.6)
-        tweenZoom.interpolate_property(camera, "zoom", camera.zoom, camera.zoom * ZOOM_PER_FRUIT, 0.6)
+        
+        var new_zoom = camera.zoom * ZOOM_PER_FRUIT
+        if new_zoom.x > 1.2:
+            new_zoom.x = 1.2
+            new_zoom.y = 1.2
+        else:
+            tweenZoom.interpolate_property(camera, "offset:y", camera.offset.y, camera.offset.y + CAM_OFFSET_PER_FRUIT, 0.6)
+        tweenZoom.interpolate_property(camera, "zoom", camera.zoom, new_zoom, 0.6)
         tweenZoom.start()
         jingle.play(0)
         
